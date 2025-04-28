@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}Кадровый учет{% endblock %}
+
+{% block content %}
+<h2>Кадровый учет</h2>
+<div class="mb-3">
+    <a href="{{ url_for('add_trainer') }}" class="btn btn-primary">Добавить тренера</a>
+</div>
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Имя</th>
+                <th>Роль</th>
+                <th>Телефон</th>
+                <th>Действия</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for trainer in trainers %}
+            <tr>
+                <td>{{ trainer.username }}</td>
+                <td>{{ trainer.role }}</td>
+                <td>{{ trainer.phone }}</td>
+                <td>
+                    <a href="{{ url_for('edit_trainer', trainer_id=trainer.id) }}" class="btn btn-warning">Редактировать</a>
+                    <form action="{{ url_for('delete_trainer', trainer_id=trainer.id) }}" method="POST" style="display:inline;">
+                        <button type="submit" class="btn btn-danger" onclick="return confirm('Вы уверены, что хотите удалить этого тренера?');">Удалить</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

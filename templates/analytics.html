@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}Аналитика{% endblock %}
+
+{% block content %}
+<h2>Аналитика</h2>
+
+<h3>Популярность услуг</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Услуга</th>
+            <th>Количество записанных клиентов</th>
+            <th>Общий доход</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for section in section_data %}
+        <tr>
+            <td>{{ section.name }}</td>
+            <td>{{ section.registration_count }}</td>
+            <td>{{ section.total_income or 0 }} руб.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

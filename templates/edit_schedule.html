@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}Редактирование расписания{% endblock %}
+
+{% block content %}
+<h2>Редактирование расписания</h2>
+<form method="POST">
+    <div class="form-group">
+        <label for="section_id">Секция</label>
+        <select name="section_id" class="form-control" required>
+            {% for section in sections %}
+            <option value="{{ section.id }}" {% if section.id == schedule.section_id %}selected{% endif %}>{{ section.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="trainer_id">Тренер</label>
+        <select name="trainer_id" class="form-control" required>
+            {% for trainer in trainers %}
+            <option value="{{ trainer.id }}" {% if trainer.id == schedule.trainer_id %}selected{% endif %}>{{ trainer.username }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="datetime">Дата и время</label>
+        <input type="datetime-local" name="datetime" class="form-control" value="{{ schedule.datetime.strftime('%Y-%m-%dT%H:%M') }}" required>
+    </div>
+    <div class="form-group">
+        <label for="duration">Продолжительность (мин)</label>
+        <input type="number" name="duration" class="form-control" value="{{ schedule.duration }}" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Сохранить изменения</button>
+    <a href="{{ url_for('schedule') }}" class="btn btn-secondary">Отмена</a>
+</form>
+{% endblock %}

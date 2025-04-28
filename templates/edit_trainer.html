@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}Редактировать тренера{% endblock %}
+
+{% block content %}
+<h2>Редактировать тренера</h2>
+<form method="POST" class="mt-4">
+    <div class="mb-3">
+        <label for="username" class="form-label">Имя пользователя:</label>
+        <input type="text" name="username" class="form-control" id="username" value="{{ trainer.username }}" required>
+    </div>
+    <div class="mb-3">
+        <label for="phone" class="form-label">Телефон:</label>
+        <input type="text" name="phone" class="form-control" id="phone" value="{{ trainer.phone }}">
+    </div>
+    <button type="submit" class="btn btn-primary">Сохранить изменения</button>
+</form>
+{% endblock %}
